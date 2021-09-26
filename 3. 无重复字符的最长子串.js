@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-09-26 10:32:25
  * @LAstEditors: Latte
- * @LastEditTime: 2021-09-26 11:54:08
+ * @LastEditTime: 2021-09-26 12:08:18
  * @FilePath: \algorithm\3. 无重复字符的最长子串.js
  */
 
@@ -56,7 +56,6 @@ const lengthOfLongestSubstring1 = (s) => {
 };
 
 let s = "abcabcabc";
-let k = "bbbbbb"
 const res = lengthOfLongestSubstring(s);
 const res1 = lengthOfLongestSubstring1(s);
-console.log(res, res1, res2);
+console.log(res, res1);
