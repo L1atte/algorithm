@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-09-28 11:30:16
  * @LAstEditors: Latte
- * @LastEditTime: 2021-09-28 14:49:01
+ * @LastEditTime: 2021-09-28 17:44:06
  * @FilePath: \algorithm\快速排序.js
  */
 function quickSort(array, start, end) {

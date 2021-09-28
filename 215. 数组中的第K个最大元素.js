@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-09-28 08:30:14
  * @LAstEditors: Latte
- * @LastEditTime: 2021-09-28 16:39:13
+ * @LastEditTime: 2021-09-28 17:43:33
  * @FilePath: \algorithm\215. 数组中的第K个最大元素.js
  */
 const bubbleSort = (array) => {
@@ -71,7 +71,6 @@ function partition(array, start, end) {
 	// 返回中间索引值
 	return start;
 }
-
 
 let nums1 = [3, 2, 1, 5, 6, 4],
 	nums2 = [3, 2, 1, 5, 6, 4],
