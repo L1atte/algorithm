@@ -1,20 +1,26 @@
 /*
  * @Author: Latte
- * @Date: 2021-09-28 11:30:16
+ * @Date: 2021-10-08 08:36:36
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-08 09:54:08
- * @FilePath: \algorithm\快速排序.js
+ * @LastEditTime: 2021-10-08 09:56:41
+ * @FilePath: \algorithm\补充题4. 手撕快速排序.js
  */
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var sortArray = function (nums) {
+	if (nums.length < 2) return nums;
+	return quickSort(nums, 0, nums.length - 1);
+};
+
 function quickSort(array, start, end) {
-	let length = array.length;
-
-	// 如果不是数组或者数组长度小于等于1，直接返回，不需要排序
-	if (!Array.isArray(array) || length <= 1 || start >= end) return;
-
+	if (start >= end) return;
 	// 将数组分为两部分，并返回右部分的第一个元素的索引值
 	let index = partition(array, start, end);
 	quickSort(array, start, index - 1); // 递归排序左半部分
 	quickSort(array, index + 1, end); // 递归排序右半部分
+	return array;
 }
 
 function partition(array, start, end) {
@@ -45,7 +51,3 @@ function partition(array, start, end) {
 	// 返回中间索引值
 	return start;
 }
-
-let nums = [3, 2, 1, 5, 551, 6, 4];
-quickSort(nums, 0, 6);
-console.log(nums);
