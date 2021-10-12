@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-09-26 10:32:25
  * @LAstEditors: Latte
- * @LastEditTime: 2021-09-26 12:08:18
+ * @LastEditTime: 2021-10-12 09:07:16
  * @FilePath: \algorithm\3. 无重复字符的最长子串.js
  */
 
@@ -47,7 +47,7 @@ const lengthOfLongestSubstring1 = (s) => {
 		max = 0;
 	for (let i = 0, j = 0; j < s.length; j++) {
 		if (map.has(s[j])) {
-			i = Math.max(map.get(s[j]) + 1, i); // i标记无重复子串起始下标，所以为map.get(s[j]) + 1
+			i = Math.max(map.get(s[j]) + 1, i); // i标记无重复子串起始下标，由于比较之后才存值，所以为map.get(s[j]) + 1
 		}
 		max = Math.max(max, j - i + 1);
 		map.set(s[j], j);
@@ -55,7 +55,7 @@ const lengthOfLongestSubstring1 = (s) => {
 	return max;
 };
 
-let s = "abcabcabc";
+let s = "abcaefghj";
 const res = lengthOfLongestSubstring(s);
 const res1 = lengthOfLongestSubstring1(s);
 console.log(res, res1);
