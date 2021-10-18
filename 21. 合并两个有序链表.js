@@ -5,6 +5,7 @@
  * @LastEditTime: 2021-10-15 09:08:16
  * @FilePath: \algorithm\21. 合并两个有序链表.js
  */
+// 迭代
 let mergeTwoLists = function (l1, l2) {
 	let newHead = new ListNode();
 
