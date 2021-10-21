@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-09-26 10:32:25
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-12 09:07:16
+ * @LastEditTime: 2021-10-21 21:13:49
  * @FilePath: \algorithm\3. 无重复字符的最长子串.js
  */
 
@@ -46,8 +46,9 @@ const lengthOfLongestSubstring1 = (s) => {
 	let map = new Map(),
 		max = 0;
 	for (let i = 0, j = 0; j < s.length; j++) {
-		if (map.has(s[j])) {
-			i = Math.max(map.get(s[j]) + 1, i); // i标记无重复子串起始下标，由于比较之后才存值，所以为map.get(s[j]) + 1
+		// 如果出现了重复字符，则把左指针移到重复字符的下一位。注意同时满足重复字符的索引大于左指针。
+		if (map.has(s[j]) && map.get(s[j]) >= i) {
+			i = map.get(s[j]) + 1; 
 		}
 		max = Math.max(max, j - i + 1);
 		map.set(s[j], j);
