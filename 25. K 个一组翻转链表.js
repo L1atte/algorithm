@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-09-29 08:48:21
  * @LAstEditors: Latte
- * @LastEditTime: 2021-09-30 11:15:32
+ * @LastEditTime: 2021-10-26 20:58:13
  * @FilePath: \algorithm\25. K 个一组翻转链表.js
  */
 /**
@@ -17,39 +17,38 @@
  * @param {number} k
  * @return {ListNode}
  */
-let reserveList = function (head, tail) {
-	let prev = new ListNode()
-  let curr = head
-
+const myReverse = (head, tail) => {
+	let prev = tail.next;
+	let p = head;
 	while (prev !== tail) {
-		[curr, prev, curr.next] = [curr.next, curr, prev];
+		const nex = p.next;
+		p.next = prev;
+		prev = p;
+		p = nex;
 	}
-	return [tail,head];
+	return [tail, head];
 };
+var reverseKGroup = function (head, k) {
+	const hair = new ListNode(0);
+	hair.next = head;
+	let pre = hair;
 
-
-let reverseKGroup = function (head, k) {
-  const hair = new ListNode();
-  hair.next = head;
-  let pre = hair;
-
-  while (head) {
-      let tail = pre;
-      // 查看剩余部分长度是否大于等于 k
-      for (let i = 0; i < k; ++i) {
-          tail = tail.next;
-          if (!tail) {
-              return hair.next;
-          }
-      }
-      const nex = tail.next;
-      [head, tail] = myReverse(head, tail);
-      // 把子链表重新接回原链表
-      pre.next = head;
-      tail.next = nex;
-      pre = tail;
-      head = tail.next;
-  }
-  return hair.next;
+	while (head) {
+		let tail = pre;
+		// 查看剩余部分长度是否大于等于 k
+		for (let i = 0; i < k; ++i) {
+			tail = tail.next;
+			if (!tail) {
+				return hair.next;
+			}
+		}
+		const nex = tail.next;
+		[head, tail] = myReverse(head, tail);
+		// 把子链表重新接回原链表, pre.next = head利用浅拷贝改变hair.next的指向
+		pre.next = head;
+		tail.next = nex;
+		pre = tail;
+		head = tail.next;
+	}
+	return hair.next;
 };
-
