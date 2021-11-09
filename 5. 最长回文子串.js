@@ -2,8 +2,17 @@
  * @Author: Latte
  * @Date: 2021-11-09 09:16:26
  * @LAstEditors: Latte
- * @LastEditTime: 2021-11-09 11:00:30
+ * @LastEditTime: 2021-11-09 11:51:36
  * @FilePath: \algorithm\5. 最长回文子串.js
+ */
+// 中心扩散法
+/**
+ * 思路
+ *  1.回文串一定是中心对称的
+ *  2.每次选择一个中心点，从中心点向两边扩散，比较左右两边字符串是否相等
+ *  3.中心点的选取有两种情况
+ *    3.1回文子串长度为奇数，则中心点为元素本身
+ *    3.2回文子串长度为偶数，则中心点为相邻两个元素
  */
 let longestPalindrome = function (s) {
 	if (!s || s.length < 2) {
