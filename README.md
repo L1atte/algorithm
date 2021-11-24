@@ -8,3 +8,20 @@
 3. dp 如何初始化
 4. 确定遍历顺序
 5. 举例推导 dp 数组
+
+## 回溯算法步骤
+
+```
+//backtrack的公式：
+result = []
+def backtrack(路径, 选择列表):
+    if 满足结束条件:
+        result.add(路径)
+        return
+    
+    for 选择 in 选择列表:
+        做选择
+        backtrack(路径, 选择列表)
+        撤销选择
+```
+
