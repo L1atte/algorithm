@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-12-01 10:41:18
  * @LAstEditors: Latte
- * @LastEditTime: 2021-12-01 10:41:19
+ * @LastEditTime: 2021-12-03 09:39:40
  * @FilePath: \algorithm\手写promise2.js
  */
 const PENDING = "pending";
@@ -152,8 +152,3 @@ const resolvePromise = (promise2, x, resolve, reject) => {
 		resolve(x);
 	}
 };
-
-let promise = new Promise((resolve, reject) => {
-	resolve("这次一定");
-});
-console.log(promise);
