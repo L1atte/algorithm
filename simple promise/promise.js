@@ -2,33 +2,34 @@
  * @Author: Latte
  * @Date: 2021-12-03 00:18:55
  * @LAstEditors: Latte
- * @LastEditTime: 2021-12-03 09:37:20
+ * @LastEditTime: 2021-12-05 18:44:47
  * @FilePath: \algorithm\simple promise\promise.js
  */
-const PENDING = "pending";
-const FULFILLED = "fulfilled";
-const REJECTED = "rejected";
 class Promise {
+	static PENDING = "pending";
+	static RESOLVED = "resolved";
+	static REJECTED = "rejected";
+
 	constructor(executor) {
-		this.status = PENDING;
+		this.state = Promise.PENDING;
 		this.value = undefined;
 		this.reason = undefined;
 		this.onResolvedCallbacks = [];
 		this.onRejectedCallbacks = [];
 
 		let resolve = (value) => {
-			if (this.status === PENDING) {
-				this.status = FULFILLED;
+			if (this.state === Promise.PENDING) {
+				this.state = Promise.RESOLVED;
 				this.value = value;
-				this.onResolvedCallbacks.forEach((fn) => fn());
+				this.onResolvedCallbacks.forEach((callback) => callback());
 			}
 		};
 
 		let reject = (reason) => {
-			if (this.status === PENDING) {
-				this.status = REJECTED;
+			if (this.state === Promise.PENDING) {
+				this.state = Promise.REJECTED;
 				this.reason = reason;
-				this.onRejectedCallbacks.forEach((fn) => fn());
+				this.onRejectedCallbacks.forEach((callback) => callback());
 			}
 		};
 
@@ -49,34 +50,35 @@ class Promise {
 				: (err) => {
 						throw err;
 				  };
+
 		// 每次调用 then 都返回一个新的 promise
 		let promise2 = new Promise((resolve, reject) => {
-			if (this.status === FULFILLED) {
+			if (this.state === Promise.RESOLVED) {
 				//Promise/A+ 2.2.4 --- setTimeout
 				setTimeout(() => {
 					try {
 						let x = onFulfilled(this.value);
 						// x可能是一个promise
 						resolvePromise(promise2, x, resolve, reject);
-					} catch (e) {
-						reject(e);
+					} catch (error) {
+						reject(error);
 					}
 				}, 0);
 			}
 
-			if (this.status === REJECTED) {
+			if (this.state === Promise.REJECTED) {
 				//Promise/A+ 2.2.3
 				setTimeout(() => {
 					try {
 						let x = onRejected(this.reason);
 						resolvePromise(promise2, x, resolve, reject);
-					} catch (e) {
-						reject(e);
+					} catch (error) {
+						reject(error);
 					}
 				}, 0);
 			}
 
-			if (this.status === PENDING) {
+			if (this.state === Promise.PENDING) {
 				this.onResolvedCallbacks.push(() => {
 					setTimeout(() => {
 						try {
@@ -104,6 +106,7 @@ class Promise {
 		return promise2;
 	}
 }
+
 const resolvePromise = (promise2, x, resolve, reject) => {
 	// 自己等待自己完成是错误的实现，用一个类型错误，结束掉 promise  Promise/A+ 2.3.1
 	if (promise2 === x) {
@@ -111,22 +114,22 @@ const resolvePromise = (promise2, x, resolve, reject) => {
 			new TypeError("Chaining cycle detected for promise #<Promise>")
 		);
 	}
-	// Promise/A+ 2.3.3.3.3 只能调用一次
-	let called;
-	// 后续的条件要严格判断 保证代码能和别的库一起使用
-	if ((typeof x === "object" && x != null) || typeof x === "function") {
+	// Promise/A+ 2.3.3.3.3 只能调用一次	
+	let called = false;
+	if ((typeof x === "object" && x !== null) || typeof x === "function") {
 		try {
-			// 为了判断 resolve 过的就不用再 reject 了（比如 reject 和 resolve 同时调用的时候）  Promise/A+ 2.3.3.1
+			// Promise/A+ 2.3.3.1
 			let then = x.then;
 			if (typeof then === "function") {
-				// 不要写成 x.then，直接 then.call 就可以了 因为 x.then 会再次取值，Object.defineProperty  Promise/A+ 2.3.3.3
+				// Promise/A+ 2.3.3.3
+				// 不要写成 x.then，直接 then.call 就可以了 因为 x.then 会再次取值，Object.defineProperty
 				then.call(
 					x,
 					(y) => {
-						// 根据 promise 的状态决定是成功还是失败
 						if (called) return;
 						called = true;
-						// 递归解析的过程（因为可能 promise 中还有 promise） Promise/A+ 2.3.3.3.1
+						// Promise/A+ 2.3.3.3.1
+						// 递归解析的过程（因为可能 promise 中还有 promise）
 						resolvePromise(promise2, y, resolve, reject);
 					},
 					(r) => {
@@ -137,17 +140,19 @@ const resolvePromise = (promise2, x, resolve, reject) => {
 					}
 				);
 			} else {
-				// 如果 x.then 是个普通值就直接返回 resolve 作为结果  Promise/A+ 2.3.3.4
+				// Promise/A+ 2.3.3.4
+				// 如果 then 不是函数，以 x 为参数解决 promise2
 				resolve(x);
 			}
-		} catch (e) {
+		} catch (error) {
 			// Promise/A+ 2.3.3.2
 			if (called) return;
 			called = true;
-			reject(e);
+			reject(error);
 		}
 	} else {
-		// 如果 x 是个普通值就直接返回 resolve 作为结果  Promise/A+ 2.3.4
+		// Promise/A+ 2.3.4
+		// 如果 x 不为对象或者函数，以 x 为参数解决 promise2
 		resolve(x);
 	}
 };
