@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-18 08:31:29
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-18 09:37:59
+ * @LastEditTime: 2021-12-30 09:04:39
  * @FilePath: \algorithm\102. 二叉树的层序遍历.js
  */
 /**
@@ -17,25 +17,26 @@
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var levelOrder = function (root) {
-  let res = [],
-    queue = [];
+var levelOrder = function(root) {
+	let res = [],
+		queue = [];
+	queue.push(root);
 
-  queue.push(root)
-  if (root === null) return res
+	if (root === null) return res;
 
-  while(queue.length !== 0) {
-    let len = queue.length
-    let curLevel = [] // 记录当前层级
-    for(let i = 0; i < len; i++) {
-      let node = queue.shift // 弹出队列的第一个元素,实现队列先进先出的结构
-      curLevel.push(node.val)
-      
-      if(node.left) queue.push(node.left)
-      if(node.right) queue.push(node.right)
-    }
-
-    // 把当前层级存入结果
-    res.push(curLevel)
-  }
+	while (queue.length !== 0) {
+		// 记录当前层级节点数
+		let length = queue.length;
+		// 存放每一层的节点
+		let curLevel = [];
+		for (let i = 0; i < length; i++) {
+			let node = queue.shift();
+			curLevel.push(node.val);
+			node.left && queue.push(node.left);
+			node.right && queue.push(node.right);
+		}
+		// 把每一层的结果放到结果数组
+		res.push(curLevel);
+	}
+	return res;
 };
