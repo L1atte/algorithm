@@ -10,33 +10,51 @@
  * 两次遍历
  * 1.第一次遍历链表获取链表长度，从而确定被删除节点的位置
  * 2.第二次遍历链表，达到被删节点的位置，利用浅拷贝的性质把节点删去
- * 3.注意，如果删除的是头节点，那么会导致删除节点并没有改变链表的内容，需要做特殊判断，直接删去头节点
+ * 3.利用哨兵节点，优化代码，可以不用考虑被删除节点为头节点的情况
  */
 var removeNthFromEnd = function (head, n) {
-	let dummy = head;
+	let temp = head;
 	let length = 0;
-
-	// 获取链表长度
-	while (dummy) {
-		dummy = dummy.next;
+	while (temp) {
+		temp = temp.next;
 		length++;
 	}
 
-	// 如果删除的是头节点，需要特殊处理，直接把头节点从链表摘出去
-	if (length === n) {
-		head = head.next;
-	}
-
 	const target = length - n;
-	dummy = head;
+	let dummy = new ListNode(0, head),
+		cur = dummy;
 
-	for (let i = 0; i <= target - 1; i++) {
-		if (i === target - 1) {
-			// 删除节点
-			dummy.next = dummy.next.next;
+	for (let i = 0; i <= target; i++) {
+		if (i === target) {
+			cur.next = cur.next.next;
 		}
-		dummy = dummy.next;
+		cur = cur.next;
 	}
 
-	return head;
+	return dummy.next;
+};
+
+/**
+ * 快慢指针
+ *
+ */
+var removeNthFromEnd = function (head, n) {
+	let ret = new ListNode(0, head),
+		slow = (fast = ret);
+
+	// fast 指针走 n 步
+	for (let i = 0; i < n; i++) {
+		fast = fast.next;
+	}
+
+	if (!fast) return ret.next;
+
+	while (fast.next) {
+		// 让 fast 指针走到链表终点（ fast.next 为null），此时 slow 指针来到被删除节点的前节点
+		fast = fast.next;
+		slow = slow.next;
+	}
+
+	slow.next = slow.next.next;
+	return ret.next;
 };
