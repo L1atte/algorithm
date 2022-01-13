@@ -1,3 +1,10 @@
+/*
+ * @Author: Latte
+ * @Date: 2022-01-13 08:50:25
+ * @LAstEditors: Latte
+ * @LastEditTime: 2022-01-13 08:51:45
+ * @FilePath: \algorithm\69. Sqrt(x).js
+ */
 var mySqrt = function (x) {
 	if (x === 0) return 0;
 	if (x === 1) return 1;
@@ -11,6 +18,11 @@ var mySqrt = function (x) {
 
 /**
  * 二分法
+ * 1.除0之外的所有整数的平方根都大于或等于1
+ * 2.取 1~x 范围内的中值 mid，并判断mid的平方与 x 的关系
+ * 3.mid * mid > x：则 x 的平方根小于 mid，接下来搜索 1~mid-1 的范围
+ * 4.mid * mid < x，则 x 的平方根大于 mid，且(mid+1)^2 > x，则 mid 是 x 的平方根
+ * 4.mid * mid < x，则 x 的平方根大于 mid，接下来搜索 mid+1~x 的范围
  */
 var mySqrt = function (x) {
 	let left = 1,
