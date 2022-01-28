@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2022-01-28 09:37:09
  * @LAstEditors: Latte
- * @LastEditTime: 2022-01-28 11:55:41
+ * @LastEditTime: 2022-01-28 12:06:31
  * @FilePath: \algorithm\105. 从前序与中序遍历序列构造二叉树.js
  */
 
@@ -17,12 +17,18 @@
  */
 var buildTree = function (preorder, inorder) {
 	if (!preorder.length) return null;
+
 	let root = new TreeNode(preorder[0]);
-	let mid = inorder.indexOf(preorder[0]);
-	root.left = buildTree(preorder.slice(1, mid + 1), inorder.slice(0, mid));
-	root.right = buildTree(
-		preorder.slice(mid + 1, preorder.length),
-		inorder.slice(mid + 1, inorder.length)
+	let rootIndex = inorder.indexOf(preorder[0]);
+
+	root.left = buildTree(
+		preorder.slice(1, rootIndex + 1),
+		inorder.slice(0, rootIndex)
 	);
+	root.right = buildTree(
+		preorder.slice(rootIndex + 1, preorder.length),
+		inorder.slice(rootIndex + 1, inorder.length)
+	);
+
 	return root;
 };
