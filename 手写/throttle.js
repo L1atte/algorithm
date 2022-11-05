@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2022-01-21 01:53:35
  * @LAstEditors: Latte
- * @LastEditTime: 2022-01-21 01:57:02
+ * @LastEditTime: 2022-10
  * @FilePath: \algorithm\手写\throttle.js
  */
 /**

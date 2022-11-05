@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-09-29 08:48:21
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-26 20:58:13
+ * @LastEditTime: 2022-10
  * @FilePath: \algorithm\25. K 个一组翻转链表.js
  */
 /**
@@ -18,16 +18,18 @@
  * @return {ListNode}
  */
 const myReverse = (head, tail) => {
-	let prev = tail.next;
-	let p = head;
-	while (prev !== tail) {
-		const nex = p.next;
-		p.next = prev;
-		prev = p;
-		p = nex;
+	let prev = null,
+		cur = head
+
+	while(prev !== tail) {
+		const next = cur.next
+		cur.next = prev
+		cur = next
+		prev = cur
 	}
-	return [tail, head];
-};
+
+	return [tail, head]
+}
 var reverseKGroup = function (head, k) {
 	const hair = new ListNode(0);
 	hair.next = head;
