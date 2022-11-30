@@ -1,23 +1,23 @@
 var multiply = function (num1, num2) {
-	const len1 = num1.length
-	const len2 = num2.length
-	const pos = new Array(len1 + len2).fill(0)
+	const length1 = num1.length,
+		length2 = num2.length
+	const res = new Array(length1 + length2).fill(0)
 
-	for (let i = len1 - 1; i >= 0; i--) {
-		const n1 = ~~num1[i]
-		for (let j = len2 - 1; j >= 0; j--) {
-			const n2 = ~~num2[j]
+	for (let p1 = length1 - 1; p1 >= 0; p1--) {
+		const n1 = ~~num1[p1]
+		for (let p2 = length2 - 1; p2 >= 0; p2--) {
+			const n2 = ~~num2[p2]
 			const multi = n1 * n2
-			const sum = pos[i + j + 1] + multi
+			const sum = res[p1 + p2 + 1] + multi
 
-			pos[i + j + 1] = sum % 10
-			pos[i + j] += Math.floor(sum / 10)
+			res[p1 + p2 + 1] = sum % 10
+			res[p1 + p2] += Math.floor(sum / 10)
 		}
 	}
 
-	while (pos[0] === 0) {
-		pos.shift()
+	while (res[0] === 0) {
+		res.shift()
 	}
 
-	return pos.length ? pos.join("") : "0"
+	return res.length ? res.join("") : "0"
 }
