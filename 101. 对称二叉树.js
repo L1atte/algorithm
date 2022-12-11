@@ -1,3 +1,8 @@
+/**
+ * 判断对称二叉树实际上是判断左右子树是否相等
+ * 所以需要先判断左右子节点是否相等，然后才能确定当前节点是否相等
+ * 因此采用后序遍历
+ */
 var isSymmetric = function (root) {
 	var compare = function (left, right) {
 		if ((left == null && right != null) || (left != null && right == null)) {
