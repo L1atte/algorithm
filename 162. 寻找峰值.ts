@@ -16,7 +16,7 @@ function findPeakElement1(nums: number[]): number {
 	let r: number = nums.length - 1
 
 	while (l + 1 < r) {
-		let mid = (l + r) / 2
+		let mid = Math.floor((l + r) / 2)
 		if (nums[mid] > nums[mid + 1]) r = mid
 		else l = mid
 	}
