@@ -1,10 +1,3 @@
-/*
- * @Author: Latte
- * @Date: 2022-01-24 00:11:22
- * @LAstEditors: Latte
- * @LastEditTime: 2022-01-24 00:49:12
- * @FilePath: \algorithm\手写\isEqual.js
- */
 function isObject(obj) {
 	return typeof obj === "object" && obj !== null;
 }

@@ -1,10 +1,3 @@
-/*
- * @Author: Latte
- * @Date: 2021-12-03 00:18:55
- * @LAstEditors: Latte
- * @LastEditTime: 2021-12-05 18:44:47
- * @FilePath: \algorithm\simple promise\promise.js
- */
 class Promise {
 	static PENDING = "pending";
 	static RESOLVED = "resolved";

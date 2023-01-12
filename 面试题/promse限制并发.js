@@ -1,10 +1,3 @@
-/*
- * @Author: Latte
- * @Date: 2022-01-06 15:38:05
- * @LAstEditors: Latte
- * @LastEditTime: 2022-01-06 15:38:06
- * @FilePath: \undefinedc:\Users\SIUI\Desktop\algorithm\promse限制并发.js
- */
 class Scheduler {
 	constructor(max) {
 		this.queue = [];

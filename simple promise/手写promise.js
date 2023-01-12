@@ -1,10 +1,3 @@
-/*
- * @Author: Latte
- * @Date: 2021-12-03 00:18:55
- * @LAstEditors: Latte
- * @LastEditTime: 2021-12-05 01:30:18
- * @FilePath: \algorithm\simple promise\手写promise.js
- */
 const PENDING = "pending";
 const FULFILLED = "fulfilled";
 const REJECTED = "rejected";

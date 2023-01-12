@@ -1,10 +1,3 @@
-/*
- * @Author: Latte
- * @Date: 2021-12-03 13:49:06
- * @LAstEditors: Latte
- * @LastEditTime: 2021-12-03 14:11:18
- * @FilePath: \algorithm\Promise API\Promise.allSettled.js
- */
 function allSettled(promises) {
 	if (promises.length === 0) {
 		return Promise.resolve([]);
