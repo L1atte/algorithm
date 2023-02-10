@@ -13,7 +13,7 @@ function findDiagonalOrder(mat: number[][]): number[] {
 			let x = i < n ? 0 : i - n + 1;
 			let y = i < n ? i : n - 1;
 			while (x < m && y >= 0) {
-				res[pos] = mat[x][y];
+				res.push(mat[x][y]);
 				pos++;
 				x++;
 				y--;
@@ -22,7 +22,7 @@ function findDiagonalOrder(mat: number[][]): number[] {
 			let x = i < m ? i : m - 1;
 			let y = i < m ? 0 : i - m + 1;
 			while (x >= 0 && y < n) {
-				res[pos] = mat[x][y];
+				res.push(mat[x][y]);
 				pos++;
 				x--;
 				y++;
