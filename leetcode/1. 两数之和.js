@@ -25,7 +25,7 @@ let twoSumWithMap = function (nums, target) {
 
 	for (let i = 0; i < len; i++) {
 		// 注意这里的键值对映射关系，因为后面我们是用值去查找对应的下标
-    map.set(nums[i], i);
+		map.set(nums[i], i);
 	}
 
 	for (let i = 0; i < len; i++) {
@@ -49,11 +49,7 @@ let twoSumWithMap2 = function (nums, target) {
 			return [i, map.get(temp)];
 		}
 
-    // 边查边存，注意这里的键值对映射关系
-    map.set(num[i], i)
+		// 边查边存，注意这里的键值对映射关系
+		map.set(num[i], i);
 	}
 };
-
-let arr = [3, 2, 4];
-console.log(twoSum(arr, 6));
-console.log(twoSumWithMap(arr, 6));
