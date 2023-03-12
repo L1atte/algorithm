@@ -18,3 +18,20 @@ function maxArea(height: number[]): number {
 	}
 	return maxArea;
 }
+
+// max(x * (j - i))
+// min(i, j) 移动
+
+function maxArea1(height: number[]): number {
+	let start: number = 0
+	let end: number = height.length - 1
+	let maxArea: number = 0
+
+	while (start <= end) {
+		const curArea = Math.min(height[start], height[end]) * (end - start)
+		maxArea = Math.max(maxArea, curArea)
+
+		height[start] > height[end] ? end-- : start++
+	}
+	return maxArea
+};
