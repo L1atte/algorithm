@@ -1,6 +1,9 @@
 // 1. store the count of char
 // 2. get the max length of store
 
+// 1、使用map管理字母出现次数
+// 2、使用split去掉不满足条件字母
+
 function longestSubstring(s: string, k: number): number {
 	let code = new Map();
 	for (let w of s) {
