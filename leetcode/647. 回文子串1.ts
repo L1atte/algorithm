@@ -9,8 +9,8 @@ function countSubstrings1(s: string): number {
 		dp[i] = new Array(s.length).fill(false);
 	}
 
-	for (let i = 0; i < s.length; i++) {
-		for (let j = 0; j <= i; j++) {
+	for (let j = 0; j < s.length; j++) {
+		for (let i = 0; i <= j; i++) {
 			if (i === j) {
 				// 单个字符的情况
 				dp[i][j] = true;
