@@ -1,25 +1,43 @@
-// [a,a, a, b,b,c]
+function searchRange(nums: number[], target: number): number[] {
+  return [findFirst(nums, target), findLast(nums, target)];
+}
 
-function lowerBound(arr: number[], target: number): number {
+// [1,2,3,4,4,4,4,4,6]
+function findFirst(nums: number[], target: number): number {
+  let first = -1;
   let left = 0;
-  let right = arr.length - 1;
+  let right = nums.length - 1;
 
   while (left <= right) {
     const mid = Math.floor((left + right) / 2);
-
-    if (arr[mid] < target) left = mid + 1;
-    else right = mid - 1;
+    if (nums[mid] === target) {
+      first = mid;
+      right = mid - 1;
+    } else if (nums[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
   }
 
-  return left;
+  return first;
 }
 
-function searchRange1(nums: number[], target: number): number[] {
-  const start = lowerBound(nums, target);
-  if (start === nums.length || nums[start] !== target) {
-    return [-1, -1]; // nums 中没有 target
+function findLast(nums: number[], target: number): number {
+  let last = -1;
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    if (nums[mid] === target) {
+      last = mid;
+      left = mid + 1;
+    } else if (nums[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
   }
-  // 如果 start 存在，那么 end 必定存在
-  const end = lowerBound(nums, target + 1) - 1;
-  return [start, end];
+  return last;
 }
