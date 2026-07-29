@@ -1,0 +1,28 @@
+// [1,2,3]
+// [false, false, false]
+
+function permute(nums: number[]): number[][] {
+  const path = [];
+  const res = [];
+  const used = new Array(nums.length).fill(false);
+
+  function backtrack() {
+    if (path.length === nums.length) {
+      res.push([...path]);
+      return;
+    }
+
+    for (let i = 0; i < nums.length; i++) {
+      if (!used[i]) {
+        path.push(nums[i]);
+        used[i] = true;
+        backtrack();
+        path.pop();
+        used[i] = false;
+      }
+    }
+  }
+
+  backtrack();
+  return res;
+}
